@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class StringCodingHasNegatives
+public class Test
 {
 
         public static void main(String[] args)
@@ -14,10 +14,32 @@ public class StringCodingHasNegatives
                         boolean result2 = callHelper(input, 0, 5786);
                         if (result1 != result2) {
                                 System.out.println("Random. Found failing case.");
+                                for (int j = 0; j < input.length; j++)
+                                        System.out.print(" " + input[j] + ",");
+                                System.out.println();
                                 break;
                         }
                         i++;
                 }
+
+                for (i = 1; i < 200000; i++)
+                {
+                        input = new byte[i];
+                        for (int j = 0; j < input.length; j++)
+                        {
+                                input[j] = (byte)j;
+                        }
+                        boolean result1 = oracleOfNegatives(input, 0, input.length);
+                        boolean result2 = callHelper(input, 0, input.length);
+                        if (result1 != result2) {
+                                System.out.println("sequential loop. Found Failing case.");
+                                for (int j = 0; j < input.length; j++)
+                                        System.out.print(" " + input[j] + ",");
+                                System.out.println();
+                                break;
+                        }
+                }
+
         }
 
         public static boolean oracleOfNegatives(byte[] ba, int off, int len)
@@ -32,7 +54,8 @@ public class StringCodingHasNegatives
 
         public static boolean callHelper(byte[] input, int off, int len)
         {
-		// TODO: uncomment below line and make StringCoding class public to make the test work.
-		// return StringCoding.hasNegatives(input, off, len);
+		// TODO: Make string coding public and uncomment below line to get the test to compile and work
+                //return StringCoding.hasNegatives(input, off, len);
         }
 }
+
